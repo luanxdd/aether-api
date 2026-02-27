@@ -19,7 +19,7 @@ API moderna para extração de metadados, streaming e download assíncrono de á
 
 ```bash
 # 1. Clone o repositório
-git clone https://github.com/SEU_USUARIO/aether-api.git
+git clone https://github.com/luanxdd/aether-api.git
 cd aether-api
 
 # 2. Instale dependências
