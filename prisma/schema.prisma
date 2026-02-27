@@ -1,0 +1,59 @@
+// Prisma schema for Aether DL
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id           String    @id @default(uuid())
+  username     String    @unique
+  role         String    // "admin" | "user"
+  createdAt    DateTime  @default(now())
+  passwordHash String
+  apiKeys      ApiKey[]
+  downloads    Download[]
+}
+
+model ApiKey {
+  id            String    @id @default(uuid())
+  key           String    @unique
+  label         String
+  userId        String
+  user          User      @relation(fields: [userId], references: [id])
+  createdAt     DateTime  @default(now())
+  expiresAt     DateTime?
+  lastUsedAt    DateTime?
+  totalRequests Int       @default(0)
+  isActive      Boolean   @default(true)
+  rateLimit     Int       @default(100)
+}
+
+model Download {
+  id          String    @id @default(uuid())
+  videoId     String
+  title       String
+  author      String
+  duration    Int
+  requestedBy String
+  requestedAt DateTime  @default(now())
+  completedAt DateTime?
+  status      String    // "pending" | "processing" | "completed" | "failed"
+  fileSize    Int?
+  fileName    String?
+  error       String?
+  userId      String?
+  user        User?     @relation(fields: [userId], references: [id])
+}
+
+model Metric {
+  id             Int      @id @default(autoincrement())
+  timestamp      DateTime @default(now())
+  endpoint       String
+  statusCode     Int
+  responseTime   Int
+  requestedBy    String
+}

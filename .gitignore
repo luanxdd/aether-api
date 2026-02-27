@@ -1,0 +1,35 @@
+# Dependências
+node_modules/
+
+# Build
+dist/
+
+# Ambiente
+.env
+*.env.local
+
+# Banco de dados
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+
+# Downloads
+downloads/
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Prisma
+prisma/migrations/
